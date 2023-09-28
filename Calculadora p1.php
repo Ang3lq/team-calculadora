@@ -22,3 +22,39 @@
         
         <input type="submit" value="Calcular">
     </form>
+    
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $num1 = $_POST["num1"];
+        $num2 = $_POST["num2"];
+        $operacion = $_POST["operacion"];
+        $resultado = 0;
+
+        switch ($operacion) {
+            case "suma":
+                $resultado = $num1 + $num2;
+                break;
+            case "resta":
+                $resultado = $num1 - $num2;
+                break;
+            case "multiplicacion":
+                $resultado = $num1 * $num2;
+                break;
+            case "division":
+                if ($num2 != 0) {
+                    $resultado = $num1 / $num2;
+                } else {
+                    echo "<p style='color: red;'>Error: No se puede dividir por cero.</p>";
+                }
+                break;
+            default:
+                echo "<p style='color: red;'>Operación no válida.</p>";
+                break;
+        }
+
+        echo "<h2>Resultado:</h2>";
+        echo "<p>{$num1} {$operacion} {$num2} = {$resultado}</p>";
+    }
+    ?>
+</body>
+</html>
